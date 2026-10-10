@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lora", sans-serif;
+  background-image: url("../drex/werna.jpeg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  animation: slowmo 3s ease-in-out forwards;
+  padding: 50px 20px;
+}
+
+@keyframes slowmo {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-family: "Poppins", serif;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.links a {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  border: 2px solid white;
+  border-radius: 25px;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.links a:hover {
+  background: white;
+  color: #6a11cb;
+}
+
+.gambar-keren {
+  max-width: 13%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: block;
+  margin: 25px auto;
+}
+
+.audio-container {
+  margin-top: 20px;
+}
+
+.audio-container audio {
+  margin-top: 15px;
+  outline: none;
+}
+
+.extra-content {
+  padding: 100px 20px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.extra-content h2 {
+  margin-bottom: 2rem;
+}
+
+.extra-content p {
+  margin-bottom: 0.5rem;
+}
+
+.footer {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .links a {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .gambar-keren {
+    max-width: 40%;
+  }
+
+  .audio-container {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .audio-container audio {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .links a {
+    display: block;
+    margin: 10px auto;
+  }
+}

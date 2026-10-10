@@ -1,0 +1,150 @@
+/* ==========================================================
+   MUSIC.CSS — khusus halaman Music
+   Gaya: iOS "Now Playing" + Liquid Glass.
+   Dipakai bersama global.css (jangan dihapus).
+   Warna halaman ini: --tone #f08fb3 (sama seperti kartu di Home)
+   ========================================================== */
+.page-music { --tone: #f08fb3; }
+
+/* ---------- Kepala halaman ---------- */
+.page-head { padding: calc(var(--nav-h) + 4.5rem) 0 1rem; }
+.page-head h1 { font-size: clamp(2.1rem, 5.8vw, 4rem); font-weight: 600; line-height: 1.15; max-width: 16ch; }
+.page-head p { color: var(--muted); max-width: 54ch; margin-top: 1.25rem; }
+.page-head .hero-hello { opacity: 1; animation: none; }
+
+/* ---------- Tata letak: Now Playing + daftar lagu ---------- */
+.np-section { padding: 1.5rem 0 3rem; }
+.np-grid { display: grid; grid-template-columns: minmax(0, 440px) 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+
+/* ---------- Kartu Now Playing: kaca transparan, sama seperti kartu di Donation ---------- */
+.player {
+  position: relative; overflow: hidden;
+  padding: 1.25rem 1.5rem 1.6rem; border-radius: 32px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi), var(--glass-shadow);
+}
+/* cahaya warna dari sampul dimatikan supaya kartu benar-benar transparan */
+.np-bg { display: none; }
+
+/* mode terang: warna jalur bar progres */
+:root[data-theme="light"] .player { --track: rgba(40, 50, 90, .2); }
+:root[data-theme="light"] .np-status { background: rgba(255, 255, 255, .6); }
+
+/* penanda status */
+.np-status {
+  display: inline-flex; align-items: center; gap: .5rem; font-size: .78rem; font-weight: 600;
+  padding: .32rem .8rem; border-radius: 999px; background: rgba(255, 255, 255, .1); border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-hi);
+}
+.np-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); transition: background .4s ease, box-shadow .4s ease; }
+.is-playing .np-status i { background: #34c759; box-shadow: 0 0 8px #34c759; }
+
+/* sampul persegi: mengecil saat jeda, membesar saat diputar (ciri khas iOS) */
+.cover {
+  width: 100%; aspect-ratio: 1; margin: 1.1rem auto 1.5rem; border-radius: 28px; overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .22); box-shadow: 0 14px 30px rgba(0, 0, 0, .35);
+  transform: scale(.84); transition: transform .7s cubic-bezier(.3, 1.4, .5, 1), box-shadow .7s ease;
+}
+.cover img { width: 100%; height: 100%; object-fit: cover; }
+.is-playing .cover { transform: scale(1); box-shadow: 0 34px 70px rgba(0, 0, 0, .5); }
+
+/* judul & artis */
+.p-meta { padding: 0 .25rem; }
+.p-title { font-size: 1.55rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; overflow-wrap: anywhere; }
+.p-artist { font-size: 1.1rem; margin-top: .1rem; color: color-mix(in srgb, var(--text) 60%, transparent); }
+
+/* bar progres & volume: tipis, menebal saat disentuh */
+.p-progress { margin-top: 1.3rem; }
+#seek, #vol {
+  --pct: 0%; display: block; width: 100%; height: 22px; background: transparent; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+}
+#vol { --pct: 80%; }
+#seek::-webkit-slider-runnable-track, #vol::-webkit-slider-runnable-track {
+  height: 6px; border-radius: 999px; transition: height .25s var(--ease);
+  background: linear-gradient(to right, var(--text) var(--pct), var(--track, rgba(150, 155, 175, .35)) var(--pct));
+}
+#seek:hover::-webkit-slider-runnable-track, #seek:active::-webkit-slider-runnable-track,
+#vol:hover::-webkit-slider-runnable-track, #vol:active::-webkit-slider-runnable-track { height: 10px; }
+#seek::-webkit-slider-thumb, #vol::-webkit-slider-thumb { -webkit-appearance: none; width: 0; height: 0; }
+#seek::-moz-range-track, #vol::-moz-range-track { height: 6px; border-radius: 999px; background: var(--track, rgba(150, 155, 175, .35)); }
+#seek::-moz-range-progress, #vol::-moz-range-progress { height: 6px; border-radius: 999px; background: var(--text); }
+#seek::-moz-range-thumb, #vol::-moz-range-thumb { width: 0; height: 0; border: 0; }
+#seek:focus-visible, #vol:focus-visible { outline: 2px solid var(--tone); outline-offset: 4px; border-radius: 6px; }
+.times { display: flex; justify-content: space-between; margin-top: -2px; font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* tombol kontrol: simbol putih polos, gelembung kaca saat disentuh */
+.p-controls { display: flex; align-items: center; justify-content: center; gap: clamp(1.4rem, 7vw, 2.6rem); margin-top: .9rem; }
+.ctl, .play-main {
+  width: 64px; height: 64px; display: grid; place-items: center; border: 0; border-radius: 50%; cursor: pointer;
+  background: none; color: var(--text);
+  transition: transform .3s cubic-bezier(.3, 1.4, .5, 1), background .25s ease;
+}
+.ctl svg { width: 34px; height: 34px; fill: currentColor; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
+.play-main svg { width: 46px; height: 46px; fill: currentColor; }
+.play-main .icon-pause { display: none; }
+.play-main[aria-pressed="true"] .icon-play { display: none; }
+.play-main[aria-pressed="true"] .icon-pause { display: block; }
+.ctl:hover, .play-main:hover { background: rgba(255, 255, 255, .12); }
+.ctl:active, .play-main:active { transform: scale(.86); background: rgba(255, 255, 255, .22); }
+:root[data-theme="light"] .ctl:hover, :root[data-theme="light"] .play-main:hover { background: rgba(0, 0, 0, .06); }
+:root[data-theme="light"] .ctl:active, :root[data-theme="light"] .play-main:active { background: rgba(0, 0, 0, .12); }
+
+/* volume */
+.p-volume { display: flex; align-items: center; gap: .8rem; margin-top: 1rem; color: var(--muted); }
+.p-volume svg { width: 19px; height: 19px; flex: none; fill: currentColor; }
+
+/* ---------- Daftar lagu (gaya "Up Next") ---------- */
+.list-title { font-size: 1.3rem; margin-bottom: .4rem; }
+.list-note { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; max-width: 60ch; }
+.tracks { list-style: none; display: grid; gap: .6rem; }
+.track {
+  width: 100%; display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 1rem;
+  padding: .6rem 1.1rem .6rem .6rem; font: inherit; color: var(--text); text-align: left; cursor: pointer;
+  border-radius: 24px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi);
+  transition: transform .3s var(--ease), border-color .3s ease, background .3s ease;
+}
+.track:hover { border-color: var(--tone); transform: translateX(4px); }
+.track:active { transform: scale(.985); }
+.track.current { border-color: var(--tone); background: color-mix(in srgb, var(--tone) 14%, var(--glass-bg)); }
+.t-thumb { position: relative; width: 52px; height: 52px; border-radius: 14px; overflow: hidden; }
+.t-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.t-text { min-width: 0; display: grid; }
+.t-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.t-artist { font-size: .86rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.track.current .t-name { color: var(--tone); }
+:root[data-theme="light"] .track.current .t-name { color: color-mix(in srgb, var(--tone) 68%, #000); }
+.t-dur { color: var(--muted); font-size: .88rem; font-variant-numeric: tabular-nums; }
+
+/* equalizer di atas sampul mini pada lagu aktif */
+.eq { position: absolute; inset: 0; display: none; align-items: flex-end; justify-content: center; gap: 3px; padding-bottom: 14px; background: rgba(0, 0, 0, .42); }
+.track.current .eq { display: flex; }
+.eq b { width: 3px; height: 18px; border-radius: 2px; background: #fff; transform-origin: bottom; transform: scaleY(.3); }
+.is-playing .track.current .eq b { animation: bounce 1s ease-in-out infinite; }
+.eq b:nth-child(2) { animation-delay: .2s !important; }
+.eq b:nth-child(3) { animation-delay: .4s !important; }
+@keyframes bounce { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
+
+/* ---------- Ajakan ---------- */
+.cta { text-align: center; padding: 1rem 0 2rem; }
+.cta h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 18ch; margin: 0 auto 1rem; }
+.cta p { color: var(--muted); max-width: 46ch; margin: 0 auto 2rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .np-grid { grid-template-columns: minmax(0, 1fr); }
+  .player { width: min(460px, 100%); margin-inline: auto; }
+  .queue { width: min(640px, 100%); margin-inline: auto; }
+  .page-head { padding-top: calc(var(--nav-h) + 3rem); }
+}
+@media (max-width: 420px) {
+  .player { padding: 1rem 1.1rem 1.3rem; border-radius: 34px; }
+  .p-title { font-size: 1.35rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eq b { animation: none !important; }
+  .cover, .np-bg { transition: none; }
+}

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yethrq — Website Pribadi</title>
+    <meta
+      name="description"
+      content="Website pribadi: profil, toko, donasi, musik, game, galeri, dan portofolio."
+    />
+    <meta name="theme-color" content="#101319" />
+    <link rel="icon" href="assets/icons/foto-lucu.jpeg" type="image/jpeg" />
+    <link rel="stylesheet" href="css/global.css" />
+    <!-- Terapkan tema tersimpan sebelum halaman tampil (mencegah kedip) -->
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("theme") || "dark";
+      } catch (e) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+  </head>
+  <body class="page-home">
+    <div class="page-fade" aria-hidden="true"></div>
+
+    <!-- NAVBAR (di halaman folder lain, tambahkan "../" di depan semua href) -->
+    <header class="navbar">
+      <a href="index.html" class="brand"
+        ><span class="brand-logo"><img src="assets/icons/foto-lucu.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
+      >
+      <nav class="nav-links" aria-label="Menu utama">
+        <a href="index.html" class="active">Home</a>
+        <a href="profile/index.html">Profile</a>
+        <a href="shop/index.html">Shop</a>
+        <a href="donation/index.html">Donation</a>
+        <a href="music/index.html">Music</a>
+        <a href="games/index.html">Games</a>
+        <a href="gallery/index.html">Gallery</a>
+        <a href="portfolio/index.html">Portfolio</a>
+      </nav>
+      <div class="nav-actions">
+        <button
+          class="music-toggle"
+          aria-pressed="false"
+          aria-label="Nyalakan musik"
+          title="Nyalakan musik"
+        >
+          <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5.5v13c0 .9 1 1.4 1.7.9l9.6-6.5c.6-.4.6-1.4 0-1.8L9.7 4.6C9 4.1 8 4.6 8 5.5z" />
+          </svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="6" y="4.5" width="4.2" height="15" rx="1.4" />
+            <rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" />
+          </svg>
+        </button>
+        <button
+          class="theme-toggle"
+          role="switch"
+          aria-checked="false"
+          aria-label="Mode terang"
+          title="Ganti tema"
+        >
+          <span class="knob"></span>
+        </button>
+        <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="glow glow-a"></div>
+        <div class="glow glow-b"></div>
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="hero-hello">Halo, saya</p>
+            <h1 class="hero-title">
+              <span class="line"><span>Yethrq.</span></span>
+              <span class="line"><span>Membuat, berbagi,</span></span>
+              <span class="line"><span>dan menikmati.</span></span>
+            </h1>
+            <p class="hero-text">
+              Ini rumah digital saya. Kenali saya, belanja produk, dengarkan
+              musik favorit, lihat karya, atau dukung lewat donasi.
+            </p>
+            <div class="hero-actions">
+              <a href="profile/index.html" class="btn btn-primary"
+                >Kenali saya</a
+              >
+              <a href="#kategori" class="btn btn-ghost">Jelajahi website</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTRO -->
+      <section class="section">
+        <div class="container intro reveal">
+          <div class="intro-text">
+            <h2>Satu website, tujuh tempat berbeda.</h2>
+            <p>
+              Setiap kategori punya halamannya sendiri. Pilih yang ingin kamu
+              buka, lalu pindah kapan saja lewat menu di bawah.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- KATEGORI -->
+      <section class="section section-tight" id="kategori">
+        <div class="container">
+          <div class="grid">
+            <a href="profile/index.html" class="card c-profile reveal">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg></span>
+              <h3>Profile</h3>
+              <p>
+                Siapa saya, apa yang saya kerjakan, dan cara menghubungi saya.
+              </p>
+            </a>
+            <a href="shop/index.html" class="card c-shop reveal">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg></span>
+              <h3>Shop</h3>
+              <p>Produk yang bisa kamu beli langsung dari toko saya.</p>
+            </a>
+            <a href="donation/index.html" class="card c-donation reveal">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>
+              <h3>Donation</h3>
+              <p>Dukung proyek saya dengan donasi, berapa pun jumlahnya.</p>
+            </a>
+            <a href="music/index.html" class="card c-music reveal">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/></svg></span>
+              <h3>Music</h3>
+              <p>Koleksi lagu yang menemani hari-hari saya.</p>
+            </a>
+            <a href="games/index.html" class="card c-games reveal">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 8h10a4 4 0 0 1 4 4v1a3 3 0 0 1-5.2 2L14.5 14h-5l-1.3 1A3 3 0 0 1 3 13v-1a4 4 0 0 1 4-4z"/><path d="M8 10.6v2.8M6.6 12h2.8"/><circle cx="15.6" cy="11.2" r=".9" fill="currentColor"/><circle cx="17.6" cy="13" r=".9" fill="currentColor"/></svg></span>
+              <h3>Games</h3>
+              <p>Game favorit yang paling sering saya mainkan.</p>
+            </a>
+            <a href="gallery/index.html" class="card c-gallery reveal">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5 4.5 4"/></svg></span>
+              <h3>Gallery</h3>
+              <p>Foto dan video dari momen yang ingin saya simpan.</p>
+            </a>
+            <a href="portfolio/index.html" class="card c-portfolio reveal">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="11" rx="2.5"/><path d="M9 8V6.5A1.5 1.5 0 0 1 10.5 5h3A1.5 1.5 0 0 1 15 6.5V8"/><path d="M3.5 13h17"/></svg></span>
+              <h3>Portfolio</h3>
+              <p>Hasil karya dan proyek yang sudah saya selesaikan.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-inner reveal">
+        <div>
+          <a href="index.html" class="brand"
+            ><span class="brand-logo"><img src="assets/icons/foto-lucu.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
+          >
+          <p class="footer-note">
+            &copy; <span id="year">2026</span> Yethrq studio. Semua hak
+            dilindungi.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Menu footer">
+          <a href="profile/index.html">Profile</a>
+          <a href="shop/index.html">Shop</a>
+          <a href="donation/index.html">Donation</a>
+          <a href="music/index.html">Music</a>
+          <a href="games/index.html">Games</a>
+          <a href="gallery/index.html">Gallery</a>
+          <a href="portfolio/index.html">Portfolio</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Musik latar: file ada di assets/audio/legacy.mp3 -->
+    <audio id="bg-music" src="assets/audio/legacy.mp3" loop preload="none"></audio>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

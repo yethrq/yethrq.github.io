@@ -1,0 +1,122 @@
+/* ==========================================================
+   GALLERY.CSS — khusus halaman Gallery
+   Dipakai bersama global.css (jangan dihapus).
+   Warna halaman ini: --tone #7cc7f2 (sama seperti kartu di Home)
+   ========================================================== */
+.page-gallery { --tone: #7cc7f2; }
+
+/* ---------- Kepala halaman ---------- */
+.page-head { padding: calc(var(--nav-h) + 4.5rem) 0 1rem; }
+.page-head h1 { font-size: clamp(2.1rem, 5.8vw, 4rem); font-weight: 600; line-height: 1.15; max-width: 16ch; }
+.page-head p { color: var(--muted); max-width: 54ch; margin-top: 1.25rem; }
+.page-head .hero-hello { opacity: 1; animation: none; }
+
+/* ---------- Filter ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2.5rem 0 1.75rem; }
+.chip {
+  font: inherit; font-size: .95rem; color: var(--muted); cursor: pointer;
+  padding: .5rem 1.1rem; border-radius: 999px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi);
+  transition: color .25s ease, background .25s ease, border-color .25s ease, transform .25s var(--ease);
+}
+.chip:hover { color: var(--text); border-color: var(--tone); }
+.chip:active { transform: scale(.95); }
+.chip[aria-pressed="true"] { color: var(--bg); background: var(--tone); border-color: var(--tone); font-weight: 600; }
+:root[data-theme="light"] .chip[aria-pressed="true"] { color: #fff; }
+
+/* ---------- Grid galeri (susunan masonry) ---------- */
+.gallery { columns: 3; column-gap: 1.1rem; }
+.shot {
+  position: relative; display: block; width: 100%; padding: 0; margin: 0 0 1.1rem;
+  break-inside: avoid; overflow: hidden; cursor: zoom-in; font: inherit; color: #fff;
+  border-radius: var(--radius); border: 1px solid var(--glass-border);
+  background: var(--surface-2);
+  box-shadow: inset 0 1px 0 var(--glass-hi), var(--glass-shadow);
+  transition: transform .35s var(--ease), border-color .3s ease, opacity .7s var(--ease);
+}
+.shot[hidden] { display: none; }
+.shot img { width: 100%; height: auto; transition: transform .6s var(--ease); }
+.shot:hover { border-color: var(--tone); }
+.shot.reveal.visible:hover { transform: translateY(-6px); }
+.shot.reveal.visible:active { transform: scale(.98); transition-duration: .18s; }
+.shot:hover img { transform: scale(1.05); }
+
+.shot-cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 2.2rem 1.1rem .9rem;
+  text-align: left; font-size: .95rem; font-weight: 500;
+  background: linear-gradient(to top, rgba(0, 0, 0, .65), transparent);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .3s ease, transform .35s var(--ease);
+}
+.shot:hover .shot-cap, .shot:focus-visible .shot-cap { opacity: 1; transform: none; }
+@media (hover: none) { .shot-cap { opacity: 1; transform: none; } }
+
+/* lencana putar untuk video */
+.shot-play {
+  position: absolute; top: .8rem; right: .8rem; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .3);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.shot-play svg { width: 16px; height: 16px; fill: #fff; }
+
+.empty { text-align: center; color: var(--muted); padding: 3rem 0; }
+
+/* ---------- Ajakan ---------- */
+.cta { text-align: center; padding: 1rem 0 2rem; }
+.cta h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 18ch; margin: 0 auto 1rem; }
+.cta p { color: var(--muted); max-width: 46ch; margin: 0 auto 2rem; }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; background: transparent; color: #fff; overflow: hidden;
+}
+.lightbox:not([open]) { display: none; }
+.lightbox::backdrop { background: rgba(8, 10, 15, .88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.lightbox[open] { display: grid; place-items: center; animation: lbIn .3s var(--ease); }
+@keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+
+.lb-figure { display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: min(1100px, 100% - 7rem); max-height: 100%; padding: 1.5rem 0; }
+.lb-stage { display: grid; place-items: center; }
+.lb-stage img, .lb-stage video {
+  max-width: 100%; max-height: 74vh; border-radius: 16px; background: #000;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .5); animation: lbPop .35s var(--ease);
+}
+@keyframes lbPop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+.lightbox figcaption { display: grid; gap: .15rem; text-align: center; max-width: 60ch; }
+.lb-title { font-size: 1.05rem; font-weight: 600; }
+.lb-desc { color: rgba(255, 255, 255, .72); font-size: .92rem; }
+.lb-count { color: rgba(255, 255, 255, .5); font-size: .82rem; margin-top: .25rem; }
+
+.lb-btn {
+  position: absolute; z-index: 2; width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; color: #fff;
+  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .25);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  transition: transform .25s var(--ease), background .25s ease;
+}
+.lb-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lb-btn:hover { background: rgba(255, 255, 255, .2); transform: scale(1.08); }
+.lb-btn:active { transform: scale(.94); }
+.lb-close { top: 1rem; right: 1rem; }
+.lb-prev { left: 1rem; top: 50%; margin-top: -23px; }
+.lb-next { right: 1rem; top: 50%; margin-top: -23px; }
+.lb-btn[hidden] { display: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) { .gallery { columns: 2; } }
+@media (max-width: 560px) {
+  .gallery { columns: 1; }
+  .page-head { padding-top: calc(var(--nav-h) + 3rem); }
+  .lb-figure { max-width: calc(100% - 1.5rem); }
+  .lb-prev, .lb-next { top: auto; bottom: 1rem; margin-top: 0; }
+  .lb-prev { left: calc(50% - 56px); }
+  .lb-next { right: calc(50% - 56px); }
+  .lb-stage img, .lb-stage video { max-height: 62vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox[open], .lb-stage img, .lb-stage video { animation: none; }
+}

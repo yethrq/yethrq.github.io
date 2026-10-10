@@ -1,0 +1,113 @@
+/* ==========================================================
+   PORTFOLIO.CSS — khusus halaman Portfolio
+   Dipakai bersama global.css (jangan dihapus).
+   Warna halaman ini: --tone #f2a07c (sama seperti kartu di Home)
+   ========================================================== */
+.page-portfolio { --tone: #f2a07c; }
+
+/* ---------- Kepala halaman ---------- */
+.page-head { padding: calc(var(--nav-h) + 4.5rem) 0 1rem; }
+.page-head h1 { font-size: clamp(2.1rem, 5.8vw, 4rem); font-weight: 600; line-height: 1.15; max-width: 16ch; }
+.page-head p { color: var(--muted); max-width: 54ch; margin-top: 1.25rem; }
+.page-head .hero-hello { opacity: 1; animation: none; }
+
+/* ---------- Filter ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2.5rem 0 1.75rem; }
+.chip {
+  font: inherit; font-size: .95rem; color: var(--muted); cursor: pointer;
+  padding: .5rem 1.1rem; border-radius: 999px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi);
+  transition: color .25s ease, background .25s ease, border-color .25s ease, transform .25s var(--ease);
+}
+.chip:hover { color: var(--text); border-color: var(--tone); }
+.chip:active { transform: scale(.95); }
+.chip[aria-pressed="true"] { color: var(--bg); background: var(--tone); border-color: var(--tone); font-weight: 600; }
+:root[data-theme="light"] .chip[aria-pressed="true"] { color: #fff; }
+
+/* ---------- Grid proyek ---------- */
+.works { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem; }
+.work {
+  --tone: var(--accent);
+  grid-column: span 2; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi), var(--glass-shadow);
+  transition: transform .35s var(--ease), border-color .3s ease;
+}
+.work[hidden] { display: none; }
+.work.featured { grid-column: span 3; }
+.work:hover { border-color: var(--tone); }
+.work.reveal.visible:hover { transform: translateY(-6px); }
+.work.reveal.visible:active { transform: scale(.98); transition-duration: .18s; }
+
+.work-cover {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden; display: grid; place-items: center;
+  background:
+    radial-gradient(70% 90% at 25% 15%, color-mix(in srgb, var(--tone) 55%, transparent), transparent 70%),
+    linear-gradient(145deg, color-mix(in srgb, var(--tone) 22%, var(--surface)), var(--surface-2));
+}
+.work-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.work:hover .work-cover img { transform: scale(1.05); }
+.work-cover svg {
+  width: 52px; height: 52px; fill: none; stroke: color-mix(in srgb, var(--tone) 40%, #fff);
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--tone) 60%, transparent));
+}
+:root[data-theme="light"] .work-cover svg { stroke: color-mix(in srgb, var(--tone) 80%, #000); filter: none; }
+
+.work-body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+.work-type { font-size: .85rem; color: var(--tone); font-weight: 600; }
+.work h3 { font-size: 1.25rem; }
+.work p { color: var(--muted); font-size: .95rem; line-height: 1.5; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; padding-top: .75rem; }
+.tags li {
+  list-style: none; font-size: .8rem; color: var(--muted);
+  padding: .15rem .65rem; border-radius: 999px; border: 1px solid var(--glass-border);
+}
+.work-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+
+/* warna tiap proyek */
+.t-1 { --tone: #f2a07c; } .t-2 { --tone: #8b9cff; } .t-3 { --tone: #7fd8b0; }
+.t-4 { --tone: #f08fb3; } .t-5 { --tone: #7cc7f2; } .t-6 { --tone: #a98bff; }
+
+/* ---------- Keahlian ---------- */
+.skills-box {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start;
+  padding: clamp(1.5rem, 4vw, 2.75rem); border-radius: var(--radius);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi), var(--glass-shadow);
+}
+.skills-box h2 { font-size: clamp(1.5rem, 3.2vw, 2.2rem); margin-bottom: .9rem; }
+.skills-box > div:first-child p { color: var(--muted); max-width: 40ch; }
+.skill-list { display: grid; gap: 1.15rem; }
+.skill-row { display: flex; justify-content: space-between; font-weight: 500; margin-bottom: .45rem; }
+.skill-row span:last-child { color: var(--muted); font-weight: 400; font-size: .9rem; }
+.bar { height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.bar i {
+  display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--tone);
+  transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ios) .2s;
+}
+.skills-box.visible .bar i { transform: scaleX(var(--v)); }
+
+/* ---------- Ajakan kontak ---------- */
+.cta { text-align: center; padding: 1rem 0 2rem; }
+.cta h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 18ch; margin: 0 auto 1rem; }
+.cta p { color: var(--muted); max-width: 46ch; margin: 0 auto 2rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .work, .work.featured { grid-column: span 3; }
+  .skills-box { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (max-width: 640px) {
+  .works { grid-template-columns: 1fr; }
+  .work, .work.featured { grid-column: auto; }
+  .page-head { padding-top: calc(var(--nav-h) + 3rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar i { transform: scaleX(var(--v)); }
+}
