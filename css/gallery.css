@@ -26,18 +26,22 @@
 .chip[aria-pressed="true"] { color: var(--bg); background: var(--tone); border-color: var(--tone); font-weight: 600; }
 :root[data-theme="light"] .chip[aria-pressed="true"] { color: #fff; }
 
-/* ---------- Grid galeri (susunan masonry) ---------- */
-.gallery { columns: 3; column-gap: 1.1rem; }
+/* ---------- Susunan galeri ala Pinterest (masonry, foto tidak dipotong) ----------
+   Jumlah kolom diatur oleh gallery.js: HP & tablet = 2 kolom,
+   layar lebar / di-zoom out = kolom bertambah otomatis, seperti Pinterest. */
+.page-gallery .container { width: calc(100% - clamp(2rem, 4vw, 5rem)); }
+.gallery { --gap: 1.1rem; display: flex; align-items: flex-start; gap: var(--gap); }
+.gcol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--gap); }
 .shot {
-  position: relative; display: block; width: 100%; padding: 0; margin: 0 0 1.1rem;
-  break-inside: avoid; overflow: hidden; cursor: zoom-in; font: inherit; color: #fff;
+  position: relative; display: block; width: 100%; padding: 0; margin: 0;
+  overflow: hidden; cursor: zoom-in; font: inherit; color: #fff;
   border-radius: var(--radius); border: 1px solid var(--glass-border);
   background: var(--surface-2);
   box-shadow: inset 0 1px 0 var(--glass-hi), var(--glass-shadow);
   transition: transform .35s var(--ease), border-color .3s ease, opacity .7s var(--ease);
 }
 .shot[hidden] { display: none; }
-.shot img { width: 100%; height: auto; transition: transform .6s var(--ease); }
+.shot img { width: 100%; height: auto; display: block; transition: transform .6s var(--ease); }
 .shot:hover { border-color: var(--tone); }
 .shot.reveal.visible:hover { transform: translateY(-6px); }
 .shot.reveal.visible:active { transform: scale(.98); transition-duration: .18s; }
@@ -107,9 +111,11 @@
 .lb-btn[hidden] { display: none; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 960px) { .gallery { columns: 2; } }
+@media (max-width: 960px) { .gallery { --gap: .8rem; } }
 @media (max-width: 560px) {
-  .gallery { columns: 1; }
+  .gallery { --gap: .6rem; }
+  .shot-cap { font-size: .8rem; padding: 1.6rem .7rem .6rem; }
+  .shot-play { width: 32px; height: 32px; top: .55rem; right: .55rem; }
   .page-head { padding-top: calc(var(--nav-h) + 3rem); }
   .lb-figure { max-width: calc(100% - 1.5rem); }
   .lb-prev, .lb-next { top: auto; bottom: 1rem; margin-top: 0; }

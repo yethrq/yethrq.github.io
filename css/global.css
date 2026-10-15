@@ -3,9 +3,9 @@
    Ubah warna & font di bagian :root untuk mengganti tema.
    ========================================================== */
 /* ---------- Font (disimpan lokal di assets/fonts, tidak butuh internet) ---------- */
-@font-face { font-family: "Poppins"; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/poppins-400.woff") format("woff"); }
-@font-face { font-family: "Poppins"; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/fonts/poppins-500.woff") format("woff"); }
-@font-face { font-family: "Poppins"; font-style: normal; font-weight: 600 700; font-display: swap; src: url("../assets/fonts/poppins-700.woff") format("woff"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/core/fonts/poppins-400.woff") format("woff"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 500; font-display: swap; src: url("../assets/core/fonts/poppins-500.woff") format("woff"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 600 700; font-display: swap; src: url("../assets/core/fonts/poppins-700.woff") format("woff"); }
 
 :root {
   --bg: #101319;
@@ -58,6 +58,32 @@ body {
 }
 a { color: inherit; text-decoration: none; }
 img, video { max-width: 100%; display: block; }
+/* ---------- Anti sorotan biru & seleksi tak sengaja (mobile) ----------
+   1) Hilangkan kotak biru transparan saat elemen di-tap (Chrome/Safari mobile).
+   2) Hilangkan outline untuk fokus lewat sentuhan/klik mouse.
+   3) Outline TETAP muncul untuk pengguna keyboard (:focus-visible) demi aksesibilitas.
+   4) Elemen UI (tombol, link, logo, ikon) tidak ikut ter-select saat ditekan lama. */
+html { -webkit-tap-highlight-color: transparent; }
+*, *::before, *::after { -webkit-tap-highlight-color: transparent; }
+
+a, button, [role="button"], [role="switch"], summary, label, select {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;          /* tap instan, tanpa zoom dobel-tap */
+}
+a img, button img, button svg, .brand-logo, .brand img {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+/* Kolom isian tetap bisa diketik & dipilih */
+input, textarea { -webkit-user-select: text; user-select: text; -webkit-tap-highlight-color: transparent; }
+
+:focus:not(:focus-visible) { outline: none; }
+button:focus, a:focus, [role="button"]:focus, [role="switch"]:focus { outline: none; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
 .container { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
@@ -145,12 +171,9 @@ main, .footer { animation: pageIn .45s var(--ease) both; }
   transition: transform .4s var(--ease);
 }
 .theme-toggle .knob::before { content: "🌙"; }
-.theme-toggle:hover .knob { transform: scale(1.08); }
 .theme-toggle[aria-checked="true"] { background: #57dd86; box-shadow: none; }
 .theme-toggle[aria-checked="true"] .knob { transform: translateX(26px); }
-.theme-toggle[aria-checked="true"]:hover .knob { transform: translateX(26px) scale(1.08); }
 .theme-toggle[aria-checked="true"] .knob::before { content: "☀️"; }
-.theme-anim, .theme-anim * { transition: background-color .4s ease, color .4s ease, border-color .4s ease !important; }
 
 /* ---------- Tombol ---------- */
 .btn {
@@ -328,7 +351,6 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 .theme-toggle .knob { top: 2px; left: 2px; width: 27px; height: 27px; font-size: 13px; box-shadow: 0 3px 8px rgba(0, 0, 0, .18), 0 1px 1px rgba(0, 0, 0, .16); }
 .theme-toggle[aria-checked="true"] { background: #34c759; }
 .theme-toggle[aria-checked="true"] .knob { transform: translateX(20px); }
-.theme-toggle[aria-checked="true"]:hover .knob { transform: translateX(20px) scale(1.06); }
 
 /* Tombol */
 .btn-primary { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 8px 20px rgba(0, 0, 0, .2); }
@@ -422,8 +444,8 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 }
 /* cahaya lembut di belakang cincin */
 .brand-logo::after { z-index: -1; filter: blur(7px); }
-.brand-logo:hover::before, .brand:focus-visible .brand-logo::before, .brand-logo:active::before { opacity: 1; transform: scale(1); animation: ringSpin 4s linear infinite; }
-.brand-logo:hover::after, .brand:focus-visible .brand-logo::after, .brand-logo:active::after { opacity: .28; transform: scale(1); animation: ringSpin 4s linear infinite; }
+.brand:focus-visible .brand-logo::before, .brand-logo:active::before, .brand-logo.ring-on::before { opacity: 1; transform: scale(1); animation: ringSpin 4s linear infinite; }
+.brand:focus-visible .brand-logo::after, .brand-logo:active::after, .brand-logo.ring-on::after { opacity: .28; transform: scale(1); animation: ringSpin 4s linear infinite; }
 .brand-logo:active img { transform: scale(.93); }
 .brand-logo img { transition: transform .3s var(--ease); }
 @keyframes ringSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -497,3 +519,26 @@ h1, h2, h3 { letter-spacing: -0.02em; }
    lebih gelap supaya tetap mudah dibaca. */
 .page-head .hero-hello { color: var(--tone, var(--accent-2)); }
 :root[data-theme="light"] .page-head .hero-hello { color: color-mix(in srgb, var(--tone, var(--accent-2)) 68%, #000); }
+
+/* ==========================================================
+   MOBILE-FRIENDLY: efek hover hanya untuk perangkat dengan mouse.
+   Di layar sentuh, :hover "menempel" setelah ditap (itu sebabnya cincin logo
+   menyala terus). Di HP cincin diatur lewat kelas .ring-on dan mati otomatis (main.js).
+   ========================================================== */
+@media (hover: hover) and (pointer: fine) {
+  .brand-logo:hover::before { opacity: 1; transform: scale(1); animation: ringSpin 4s linear infinite; }
+  .brand-logo:hover::after { opacity: .28; transform: scale(1); animation: ringSpin 4s linear infinite; }
+  .theme-toggle:hover .knob { transform: scale(1.08); }
+  .theme-toggle[aria-checked="true"]:hover .knob { transform: translateX(20px) scale(1.06); }
+}
+
+/* ==========================================================
+   GANTI TEMA YANG MULUS
+   Memakai View Transitions: browser memotret halaman lama & baru lalu memudarkan
+   keduanya di GPU (satu lapisan), bukan menganimasikan ratusan elemen satu per satu
+   (itulah yang terasa keras/patah-patah di HP).
+   ========================================================== */
+::view-transition-old(root), ::view-transition-new(root) {
+  animation-duration: .6s;
+  animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+}

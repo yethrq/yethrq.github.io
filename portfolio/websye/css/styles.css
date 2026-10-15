@@ -67,3 +67,8 @@ button {
 button:hover {
   background: #e0e0e0;
 }
+
+/* Hilangkan sorotan biru saat tap di mobile */
+* { -webkit-tap-highlight-color: transparent; }
+a, button { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
+a:focus, button:focus { outline: none; }

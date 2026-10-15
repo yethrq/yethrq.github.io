@@ -9,7 +9,7 @@
      Nilai di bawah hanya contoh. Ganti dengan data asli sebelum website dipublikasikan.
      Untuk QRIS, taruh gambar QR di assets/images/qris.png lalu isi "image". */
   const PAYMENT = {
-    qris:    { label: "QRIS", image: "", note: "Scan kode QR dengan aplikasi e-wallet atau m-banking, lalu masukkan nominal sesuai donasi." },
+    qris:    { label: "QRIS", image: "assets/donation/qris-yethrq.png", note: "Scan kode QR dengan aplikasi e-wallet atau m-banking, lalu masukkan nominal sesuai donasi." },
     bank:    { label: "Transfer bank", name: "Nama Bank — a.n. Nama Kamu", number: "0000 0000 0000", note: "Transfer sesuai nominal donasi." },
     ewallet: { label: "E-wallet", name: "DANA / GoPay / OVO — a.n. Nama Kamu", number: "0800 0000 0000", note: "Kirim sesuai nominal donasi." }
   };
@@ -99,7 +99,8 @@
     let detail = "";
     if (key === "qris") {
       detail = pay.image
-        ? '<img src="../' + esc(pay.image) + '" alt="Kode QRIS" style="max-width:220px;margin:0 auto;border-radius:20px">'
+        ? '<div class="qris-box"><img src="../' + esc(pay.image) + '" alt="Kode QRIS Yethrq" width="1080" height="1080">' +
+          '<a class="btn btn-ghost qris-dl" href="../' + esc(pay.image) + '" download="qris-yethrq.png">Simpan QRIS</a></div>'
         : "";
     } else {
       detail = '<strong>' + esc(pay.name) + '</strong>' +

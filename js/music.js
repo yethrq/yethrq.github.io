@@ -28,7 +28,7 @@
   const vol = document.getElementById("vol");
   const coverImg = document.getElementById("cover-img");
   const bgImg = document.getElementById("np-bg");
-  const dir = bg.getAttribute("src").replace(/[^\/]*$/, ""); // folder audio
+  const dir = "../assets/music/audio/"; // folder lagu halaman Music (Legacy ada di assets/core/audio)
 
   let index = 0;
   let seeking = false;

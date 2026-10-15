@@ -6,9 +6,9 @@
     <title>Portfolio — Yethrq</title>
     <meta name="description" content="Hasil karya dan proyek yang sudah diselesaikan Yethrq." />
     <meta name="theme-color" content="#101319" />
-    <link rel="icon" href="../assets/icons/foto-lucu.jpeg" type="image/jpeg" />
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/portfolio.css" />
+    <link rel="icon" href="../assets/core/images/foto-profil.jpeg" type="image/jpeg" />
+    <link rel="stylesheet" href="../css/global.css?v=20261014" />
+    <link rel="stylesheet" href="../css/portfolio.css?v=20261015" />
     <script>
       try {
         document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
@@ -22,7 +22,7 @@
 
     <header class="navbar">
       <a href="../index.html" class="brand"
-        ><span class="brand-logo"><img src="../assets/icons/foto-lucu.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
+        ><span class="brand-logo"><img src="../assets/core/images/foto-profil.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
       >
       <nav class="nav-links" aria-label="Menu utama">
         <a href="../index.html">Home</a>
@@ -60,7 +60,7 @@
           <p class="hero-hello">Portfolio</p>
           <h1>Karya yang sudah saya selesaikan.</h1>
           <p>
-            Ini adalah website pertama saya di dunia ini. Lihat dan rasakan sendiri.
+            Website pertama saya dan beberapa tugas belajar. Lihat dan rasakan sendiri.
           </p>
         </div>
       </section>
@@ -80,6 +80,45 @@
                 <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
               </div>
               <a class="work-link" href="websye/index.html" aria-label="Buka proyek Websye"></a>
+            </article>
+
+            <article class="work featured t-2 reveal" data-cat="web">
+              <div class="work-cover">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M8 8h8M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16h.01M12 16h.01M15.5 16h.01"/></svg>
+              </div>
+              <div class="work-body">
+                <span class="work-type">Tugas</span>
+                <h3>Kalkulator</h3>
+                <p>Kalkulator sederhana dengan efek suara klik, dibuat tanpa file mp3.</p>
+                <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+              </div>
+              <a class="work-link" href="kalkulator/index.html" aria-label="Buka proyek Kalkulator"></a>
+            </article>
+
+            <article class="work featured t-3 reveal" data-cat="web">
+              <div class="work-cover">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="9" rx="7.5" ry="3"/><path d="M4.5 9v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V9M8 4l2.5 4M16 4l-2.5 4"/></svg>
+              </div>
+              <div class="work-body">
+                <span class="work-type">Tugas</span>
+                <h3>Drum Machine</h3>
+                <p>Tekan tombol Q, W, E, A, S, D, Z, X, C atau klik pad untuk memainkan suara drum.</p>
+                <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+              </div>
+              <a class="work-link" href="drum-machine/index.html" aria-label="Buka proyek Drum Machine"></a>
+            </article>
+
+            <article class="work featured t-4 reveal" data-cat="web">
+              <div class="work-cover">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M7 15v-6l2.5 3L12 9v6M16 9v6M14 13l2 2 2-2"/></svg>
+              </div>
+              <div class="work-body">
+                <span class="work-type">Tugas</span>
+                <h3>Markdown Previewer</h3>
+                <p>Tulis Markdown di kiri, hasilnya langsung tampil di kanan.</p>
+                <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+              </div>
+              <a class="work-link" href="markdown-previewer/index.html" aria-label="Buka proyek Markdown Previewer"></a>
             </article>
           </div>
         </div>
@@ -102,7 +141,7 @@
       <div class="container footer-inner reveal">
         <div>
           <a href="../index.html" class="brand"
-            ><span class="brand-logo"><img src="../assets/icons/foto-lucu.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
+            ><span class="brand-logo"><img src="../assets/core/images/foto-profil.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
           >
           <p class="footer-note">
             &copy; <span id="year">2026</span> Yethrq studio. Semua hak dilindungi.
@@ -120,8 +159,8 @@
       </div>
     </footer>
 
-    <audio id="bg-music" src="../assets/audio/legacy.mp3" loop preload="none"></audio>
+    <audio id="bg-music" src="../assets/core/audio/legacy.mp3" loop preload="none"></audio>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js?v=20261018"></script>
   </body>
 </html>

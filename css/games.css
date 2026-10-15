@@ -1,0 +1,135 @@
+/* ==========================================================
+   GAMES.CSS — khusus halaman Games
+   Dipakai bersama global.css (jangan dihapus).
+   Warna halaman ini: --tone #a98bff (sama seperti kartu di Home)
+   Daftar game favorit diatur di js/konten.js (bagian "game").
+   ========================================================== */
+.page-games { --tone: #a98bff; }
+
+/* ---------- Kepala halaman ---------- */
+.page-head { padding: calc(var(--nav-h) + 4.5rem) 0 1rem; }
+.page-head h1 { font-size: clamp(2.1rem, 5.8vw, 4rem); font-weight: 600; line-height: 1.15; max-width: 18ch; }
+.page-head p { color: var(--muted); max-width: 54ch; margin-top: 1.25rem; }
+.page-head .hero-hello { opacity: 1; animation: none; }
+
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+.sec-head h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+
+/* ---------- Game favorit ---------- */
+.gcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+.gcard {
+  position: relative; overflow: hidden; display: flex; flex-direction: column;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi), var(--glass-shadow);
+  transition: transform .35s var(--ease), border-color .3s ease;
+}
+.gcard:hover { border-color: var(--tone); }
+.gcard.reveal.visible:hover { transform: translateY(-6px); }
+.gcard-cover {
+  aspect-ratio: 16 / 9; display: grid; place-items: center; color: color-mix(in srgb, var(--tone) 40%, #fff);
+  background:
+    radial-gradient(70% 90% at 25% 15%, color-mix(in srgb, var(--tone) 55%, transparent), transparent 70%),
+    linear-gradient(145deg, color-mix(in srgb, var(--tone) 22%, var(--surface)), var(--surface-2));
+}
+.gcard-cover svg {
+  width: 54px; height: 54px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--tone) 60%, transparent));
+}
+:root[data-theme="light"] .gcard-cover { color: color-mix(in srgb, var(--tone) 80%, #000); }
+:root[data-theme="light"] .gcard-cover svg { filter: none; }
+.gcard-body { padding: 1.25rem 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .35rem; }
+.gcard-genre { font-size: .78rem; color: var(--tone); font-weight: 500; letter-spacing: .02em; }
+.gcard h3 { font-size: 1.2rem; }
+.gcard p { color: var(--muted); font-size: .92rem; line-height: 1.5; }
+.gcard-plat {
+  align-self: flex-start; margin-top: .5rem; font-size: .78rem; padding: .2rem .7rem; border-radius: 999px;
+  border: 1px solid var(--glass-border); color: var(--muted);
+}
+.gcard-more { background: transparent; border-style: dashed; border-color: var(--line); box-shadow: none; justify-content: center; min-height: 180px; }
+.gcard-more .gcard-body { align-items: center; text-align: center; }
+
+/* ---------- Arcade ---------- */
+.arcade { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; align-items: start; }
+.panel {
+  position: relative; overflow: hidden;
+  padding: clamp(1.25rem, 3.5vw, 2rem); border-radius: var(--radius);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 1px 0 var(--glass-hi), var(--glass-shadow);
+}
+.panel::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--tone); }
+.game-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.1rem; }
+.game-top h3 { font-size: 1.35rem; }
+.game-help { color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.btn.small { padding: .45rem 1rem; font-size: .85rem; cursor: pointer; background: none; font-family: inherit; flex: none; }
+
+.scorebar { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-bottom: 1.1rem; }
+.scorebar li {
+  padding: .55rem .5rem; text-align: center; border-radius: 14px;
+  background: var(--surface-2); border: 1px solid var(--line);
+}
+.scorebar span { display: block; font-size: .72rem; color: var(--muted); line-height: 1.3; }
+.scorebar strong { font-family: var(--font-display); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+
+.game-msg { min-height: 1.6em; margin-top: 1rem; text-align: center; font-size: .92rem; color: var(--tone); font-weight: 500; }
+
+/* ---------- Memory ---------- */
+.mem-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; perspective: 900px; }
+.mem-card {
+  position: relative; aspect-ratio: 1; padding: 0; border: 0; cursor: pointer; font: inherit; color: inherit;
+  background: none; transform-style: preserve-3d; transition: transform .45s var(--ease);
+}
+.mem-card .face {
+  position: absolute; inset: 0; display: grid; place-items: center; border-radius: 14px;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.mem-card .back {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--tone) 55%, var(--surface)), color-mix(in srgb, var(--tone) 20%, var(--surface-2)));
+  border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
+  box-shadow: inset 0 1px 0 var(--glass-hi);
+}
+.mem-card .back::after { content: "?"; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: rgba(255, 255, 255, .75); }
+.mem-card .front {
+  transform: rotateY(180deg); font-size: clamp(1.6rem, 5vw, 2.2rem);
+  background: var(--surface-2); border: 1px solid var(--glass-border);
+}
+.mem-card:hover:not(.flipped):not(.matched) { transform: translateY(-3px); }
+.mem-card.flipped, .mem-card.matched { transform: rotateY(180deg); }
+.mem-card.matched .front { border-color: var(--tone); background: color-mix(in srgb, var(--tone) 20%, var(--surface-2)); }
+.mem-card.matched { animation: matchPop .5s var(--ease); }
+@keyframes matchPop { 0% { transform: rotateY(180deg) scale(1); } 50% { transform: rotateY(180deg) scale(1.1); } 100% { transform: rotateY(180deg) scale(1); } }
+
+/* ---------- Tap cepat ---------- */
+.tap-pad {
+  width: 100%; aspect-ratio: 16 / 10; cursor: pointer; font: inherit; color: #fff;
+  border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--tone) 55%, transparent);
+  background:
+    radial-gradient(80% 100% at 30% 0%, color-mix(in srgb, var(--tone) 75%, #fff 10%), transparent 70%),
+    linear-gradient(145deg, color-mix(in srgb, var(--tone) 70%, #000), color-mix(in srgb, var(--tone) 35%, #000));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 14px 30px color-mix(in srgb, var(--tone) 28%, transparent);
+  transition: transform .12s var(--ease), box-shadow .2s ease, filter .2s ease;
+  display: grid; place-items: center;
+}
+.tap-pad span { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 5vw, 2.4rem); text-shadow: 0 2px 10px rgba(0, 0, 0, .3); pointer-events: none; }
+.tap-pad:active, .tap-pad.hit { transform: scale(.97); }
+.tap-pad:disabled { filter: saturate(.5) brightness(.8); cursor: default; }
+
+/* ---------- Ajakan ---------- */
+.cta { text-align: center; padding: 1rem 0 2rem; }
+.cta h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); max-width: 18ch; margin: 0 auto 1rem; }
+.cta p { color: var(--muted); max-width: 46ch; margin: 0 auto 2rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .arcade { grid-template-columns: 1fr; }
+  .gcards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .page-head { padding-top: calc(var(--nav-h) + 3rem); }
+  .gcards { grid-template-columns: 1fr; }
+  .mem-board { gap: .45rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mem-card, .mem-card.matched { transition: none; animation: none; }
+}

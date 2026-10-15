@@ -1,0 +1,53 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+#app {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+#editor {
+  width: 50%;
+  height: 300px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 15px;
+  resize: vertical;
+}
+
+#preview {
+  width: 50%;
+  min-height: 300px;
+  border: 1px solid black;
+  padding: 10px;
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+}
+
+#preview img { max-width: 100%; height: auto; }
+#preview pre { overflow-x: auto; max-width: 100%; }
+#preview table { display: block; overflow-x: auto; max-width: 100%; }
+
+/* ---------- TABLET (601px - 1024px): tetap berdampingan, lebih tinggi ---------- */
+@media (min-width: 601px) and (max-width: 1024px) {
+  body { padding: 24px; }
+  #app { gap: 16px; }
+  #editor { height: 60vh; font-size: 16px; }
+  #preview { min-height: 60vh; }
+}
+
+/* ---------- HP (maks 600px): ditumpuk atas-bawah ---------- */
+@media (max-width: 600px) {
+  body { padding: 12px; }
+  #app { flex-direction: column; gap: 14px; }
+  #editor, #preview { width: 100%; }
+  #editor { height: 38vh; font-size: 16px; } /* 16px mencegah iOS zoom otomatis */
+  #preview { min-height: 30vh; }
+}

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Games — Yethrq</title>
+    <meta name="description" content="Game favorit Yethrq dan dua game mini yang bisa dimainkan langsung." />
+    <meta name="theme-color" content="#101319" />
+    <link rel="icon" href="../assets/core/images/foto-profil.jpeg" type="image/jpeg" />
+    <link rel="stylesheet" href="../css/global.css?v=20261014" />
+    <link rel="stylesheet" href="../css/games.css?v=20261019" />
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+      } catch (e) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+  </head>
+  <body class="page-games">
+    <div class="page-fade" aria-hidden="true"></div>
+
+    <header class="navbar">
+      <a href="../index.html" class="brand"
+        ><span class="brand-logo"><img src="../assets/core/images/foto-profil.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
+      >
+      <nav class="nav-links" aria-label="Menu utama">
+        <a href="../index.html">Home</a>
+        <a href="../profile/index.html">Profile</a>
+        <a href="../shop/index.html">Shop</a>
+        <a href="../donation/index.html">Donation</a>
+        <a href="../music/index.html">Music</a>
+        <a href="index.html" class="active" aria-current="page">Games</a>
+        <a href="../gallery/index.html">Gallery</a>
+        <a href="../portfolio/index.html">Portfolio</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="music-toggle" aria-pressed="false" aria-label="Nyalakan musik" title="Nyalakan musik">
+          <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5.5v13c0 .9 1 1.4 1.7.9l9.6-6.5c.6-.4.6-1.4 0-1.8L9.7 4.6C9 4.1 8 4.6 8 5.5z" />
+          </svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="6" y="4.5" width="4.2" height="15" rx="1.4" />
+            <rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" />
+          </svg>
+        </button>
+        <button class="theme-toggle" role="switch" aria-checked="false" aria-label="Mode terang" title="Ganti tema">
+          <span class="knob"></span>
+        </button>
+        <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- KEPALA HALAMAN -->
+      <section class="page-head">
+        <div class="container">
+          <p class="hero-hello">Games</p>
+          <h1>Game favorit, dan game yang bisa kamu mainkan.</h1>
+          <p>Lihat game yang paling sering saya mainkan, lalu coba dua game mini buatan saya langsung di halaman ini.</p>
+        </div>
+      </section>
+
+      <!-- GAME FAVORIT -->
+      <section class="section-tight">
+        <div class="container">
+          <div class="sec-head reveal"><h2>Game favorit</h2></div>
+          <div class="gcards" id="fav-games"></div>
+        </div>
+      </section>
+
+      <!-- GAME MINI -->
+      <section class="section-tight">
+        <div class="container">
+          <div class="sec-head reveal"><h2>Main di sini</h2></div>
+          <div class="arcade">
+
+            <!-- MEMORY -->
+            <div class="panel game reveal" id="memory">
+              <div class="game-top">
+                <div>
+                  <h3>Memory Match</h3>
+                  <p class="game-help">Cari semua pasangan kartu yang sama.</p>
+                </div>
+                <button type="button" class="btn btn-ghost small" id="mem-reset">Acak ulang</button>
+              </div>
+              <ul class="scorebar" aria-live="polite">
+                <li><span>Langkah</span><strong id="mem-moves">0</strong></li>
+                <li><span>Waktu</span><strong id="mem-time">0:00</strong></li>
+                <li><span>Terbaik</span><strong id="mem-best">–</strong></li>
+              </ul>
+              <div class="mem-board" id="mem-board" role="group" aria-label="Papan kartu"></div>
+              <p class="game-msg" id="mem-msg" role="status" aria-live="polite"></p>
+            </div>
+
+            <!-- TAP CEPAT -->
+            <div class="panel game reveal" id="tap">
+              <div class="game-top">
+                <div>
+                  <h3>Tap Cepat</h3>
+                  <p class="game-help">Tap sebanyak mungkin dalam 10 detik.</p>
+                </div>
+                <button type="button" class="btn btn-ghost small" id="tap-reset">Ulangi</button>
+              </div>
+              <ul class="scorebar" aria-live="polite">
+                <li><span>Skor</span><strong id="tap-score">0</strong></li>
+                <li><span>Sisa</span><strong id="tap-time">10.0</strong></li>
+                <li><span>Terbaik</span><strong id="tap-best">–</strong></li>
+              </ul>
+              <button type="button" class="tap-pad" id="tap-pad" aria-label="Tombol tap">
+                <span id="tap-label">Mulai</span>
+              </button>
+              <p class="game-msg" id="tap-msg" role="status" aria-live="polite"></p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- AJAKAN -->
+      <section class="section-tight">
+        <div class="container cta reveal">
+          <h2>Punya rekomendasi game?</h2>
+          <p>Sambil bermain, dengarkan lagu favorit saya atau lihat karya yang sudah saya buat.</p>
+          <div class="hero-actions" style="justify-content:center;opacity:1;animation:none">
+            <a href="../music/index.html" class="btn btn-primary">Dengar Music</a>
+            <a href="../index.html" class="btn btn-ghost">Kembali ke Home</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <footer class="footer">
+      <div class="container footer-inner reveal">
+        <div>
+          <a href="../index.html" class="brand"
+            ><span class="brand-logo"><img src="../assets/core/images/foto-profil.jpeg" alt="" width="40" height="40" /></span>Yethrq</a
+          >
+          <p class="footer-note">
+            &copy; <span id="year">2026</span> Yethrq studio. Semua hak dilindungi.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Menu footer">
+          <a href="../profile/index.html">Profile</a>
+          <a href="../shop/index.html">Shop</a>
+          <a href="../donation/index.html">Donation</a>
+          <a href="../music/index.html">Music</a>
+          <a href="index.html">Games</a>
+          <a href="../gallery/index.html">Gallery</a>
+          <a href="../portfolio/index.html">Portfolio</a>
+        </nav>
+      </div>
+    </footer>
+
+    <audio id="bg-music" src="../assets/core/audio/legacy.mp3" loop preload="none"></audio>
+
+    <script src="../js/konten.js?v=20261021"></script>
+    <script src="../js/render.js?v=20261021"></script>
+    <script src="../js/main.js?v=20261018"></script>
+    <script src="../js/games.js?v=20261019"></script>
+  </body>
+</html>

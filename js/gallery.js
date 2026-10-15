@@ -22,28 +22,87 @@
   let current = 0;       // indeks di dalam daftar yang sedang tampil
   let lastFocus = null;
 
-  // 1. Filter ---------------------------------------------------------------
+  // 1. Filter + susunan Pinterest -------------------------------------------
+  const grid = document.getElementById("gallery");
+  const holder = document.createElement("div");   // tempat menyimpan item yang disembunyikan
+  holder.hidden = true;
+  let colCount = 0;
+
   function visibleShots() {
     return shots.filter(function (s) { return !s.hidden; });
+  }
+
+  function columnsFor(width) {
+    if (window.innerWidth <= 960) return 2;                    // HP & tablet: 2 kolom
+    return Math.max(3, Math.min(12, Math.floor(width / 260))); // desktop: makin lebar / zoom out, makin banyak kolom
+  }
+
+  function ratio(el) {
+    const img = el.querySelector("img");
+    const w = parseFloat(img.getAttribute("width")) || img.naturalWidth || 1;
+    const h = parseFloat(img.getAttribute("height")) || img.naturalHeight || 1;
+    return h / w;
+  }
+
+  // Masonry: tiap foto ditaruh di kolom yang paling pendek -> rapi, foto tidak dipotong
+  function layout(force) {
+    if (!grid) return;
+    const n = columnsFor(grid.clientWidth || grid.parentNode.clientWidth);
+    if (!force && n === colCount) return;
+    colCount = n;
+    shots.forEach(function (s) { holder.appendChild(s); });
+    grid.textContent = "";
+    grid.appendChild(holder);
+    const cols = [], heights = [];
+    for (let i = 0; i < n; i++) {
+      const c = document.createElement("div");
+      c.className = "gcol";
+      grid.appendChild(c); cols.push(c); heights.push(0);
+    }
+    visibleShots().forEach(function (s) {
+      let k = 0;
+      for (let i = 1; i < n; i++) if (heights[i] < heights[k] - 0.001) k = i;
+      cols[k].appendChild(s);
+      heights[k] += ratio(s);
+    });
   }
 
   function applyFilter(type) {
     shots.forEach(function (s) {
       const show = type === "all" || s.dataset.type === type;
       s.hidden = !show;
-      // pastikan item yang baru ditampilkan langsung terlihat
       if (show) s.classList.add("visible");
     });
     chips.forEach(function (c) {
       c.setAttribute("aria-pressed", String(c.dataset.filter === type));
     });
     if (empty) empty.hidden = visibleShots().length > 0;
+    layout(true);
   }
 
   chips.forEach(function (c) {
     c.addEventListener("click", function () { applyFilter(c.dataset.filter); });
   });
   applyFilter("all");
+
+  // Foto tanpa ukuran di konten.js: susun ulang setelah gambarnya selesai dimuat
+  let lt;
+  shots.forEach(function (s) {
+    const im = s.querySelector("img");
+    if (im && !im.getAttribute("width")) {
+      im.addEventListener("load", function () {
+        clearTimeout(lt);
+        lt = setTimeout(function () { layout(true); }, 50);
+      });
+    }
+  });
+
+  // zoom in/out atau putar layar -> jumlah kolom menyesuaikan
+  let rt;
+  window.addEventListener("resize", function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () { layout(false); }, 80);
+  });
 
   // 2. Lightbox -------------------------------------------------------------
   function render() {
