@@ -211,48 +211,53 @@ window.KONTEN = {
      namaToko  = nama toko di pesan pesanan
      whatsapp  = nomor WhatsApp penerima pesanan, awali 62 tanpa
                  tanda + atau spasi. Contoh: "6281234567890".
-                 Kalau kosong, pembeli hanya bisa "Salin pesanan".
      produk    = daftar barang:
-       id        = kode unik tanpa spasi (jangan sama dengan produk lain)
-       nama      = nama produk
-       kategori  = pengelompok tombol filter (boleh dikosongkan: "")
-       harga     = angka saja, tanpa titik. Contoh: 25000
-       deskripsi = keterangan singkat
-       foto      = nama file foto (boleh dikosongkan: "" -> tampil ikon)
-       stok      = jumlah tersedia. 0 = habis. Hapus baris ini kalau
-                   stok tidak dibatasi.
-       label     = tulisan kecil di pojok foto, misal "Baru" (boleh kosong)
+       id         = kode unik tanpa spasi (jangan sama dengan produk lain)
+       nama       = nama produk
+       kategori   = pengelompok tombol filter (boleh kosong: "")
+       harga      = harga yang dibayar pembeli (harga diskon), angka saja
+       hargaAsli  = harga sebelum diskon (dicoret). Boleh dihapus kalau
+                    tidak ada diskon. Badge -% dihitung otomatis.
+       rating     = angka 0 sampai 5, misal 5 atau 4.5 (boleh dihapus)
+       deskripsi  = keterangan singkat
+       foto       = nama file foto di assets/shop/products/ (boleh kosong)
+       stok       = jumlah tersedia. 0 = habis. Hapus baris ini kalau
+                    stok tidak dibatasi.
+       label      = tulisan kecil di pojok foto, misal "Baru" (boleh kosong)
      --------------------------------------------------------- */
   toko: {
     namaToko: "Yethrq Shop",
-    whatsapp: "",
+    whatsapp: "6281535351447",
     produk: [
       {
-        id: "contoh-1",
-        nama: "Contoh Produk 1",
-        kategori: "Digital",
-        harga: 15000,
-        deskripsi: "Ganti dengan produk aslimu di js/konten.js.",
-        foto: "",
-        label: "Contoh",
+        id: "roll-cokelat",
+        nama: "Roll Cokelat",
+        kategori: "Kue Roll",
+        harga: 90000,
+        hargaAsli: 100000,
+        rating: 5,
+        deskripsi: "Kue roll cokelat yang lembut dengan pilihan isian keju, cokelat, atau kombinasi keduanya yang manis dan lezat.",
+        foto: "roll-cokelat.jpg",
       },
       {
-        id: "contoh-2",
-        nama: "Contoh Produk 2",
-        kategori: "Merchandise",
+        id: "roll-keju",
+        nama: "Roll Keju",
+        kategori: "Kue Roll",
+        harga: 90000,
+        hargaAsli: 100000,
+        rating: 5,
+        deskripsi: "Kue roll lembut dengan pilihan isian keju, cokelat, atau perpaduan keduanya yang gurih dan nikmat.",
+        foto: "roll-keju.jpg",
+      },
+      {
+        id: "roll-selai",
+        nama: "Roll Selai",
+        kategori: "Kue Roll",
         harga: 75000,
-        deskripsi: "Foto produk taruh di assets/shop/products/.",
-        foto: "",
-        stok: 5,
-      },
-      {
-        id: "contoh-3",
-        nama: "Contoh Produk 3",
-        kategori: "Merchandise",
-        harga: 120000,
-        deskripsi: "Stok 0 akan tampil sebagai Habis.",
-        foto: "",
-        stok: 0,
+        hargaAsli: 85000,
+        rating: 5,
+        deskripsi: "Kue roll lembut dengan pilihan selai nanas, blueberry, atau stroberi yang manis dan lezat.",
+        foto: "roll-selai.jpg",
       },
     ],
   },

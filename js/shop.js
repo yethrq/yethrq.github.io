@@ -22,11 +22,17 @@
     .filter(function (p) { return p && p.nama; })
     .map(function (p, i) {
       const limited = typeof p.stok === "number";
+      const harga = Math.max(0, Number(p.harga) || 0);
+      const asli = Math.max(0, Number(p.hargaAsli) || 0);
+      const rating = Math.max(0, Math.min(5, Number(p.rating) || 0));
       return {
+        hargaAsli: asli > harga ? asli : 0,
+        diskon: asli > harga ? Math.round((1 - harga / asli) * 100) : 0,
+        rating: rating,
         id: String(p.id || slug(p.nama) || "produk-" + i),
         nama: String(p.nama),
         kategori: p.kategori ? String(p.kategori) : "",
-        harga: Math.max(0, Number(p.harga) || 0),
+        harga: harga,
         deskripsi: p.deskripsi ? String(p.deskripsi) : "",
         foto: p.foto ? "../assets/shop/products/" + p.foto : "",
         label: p.label ? String(p.label) : "",
@@ -65,6 +71,30 @@
     if (cls) e.className = cls;
     if (text !== undefined) e.textContent = text;
     return e;
+  }
+  const STAR =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z"/></svg>';
+  function ratingRow(r) {
+    const row = el("div", "pcard-rate");
+    const st = el("span", "stars");
+    st.setAttribute("role", "img");
+    st.setAttribute("aria-label", "Rating " + r.toFixed(1) + " dari 5");
+    const bg = el("span", "stars-bg");
+    bg.innerHTML = STAR.repeat(5);
+    const fg = el("span", "stars-fg");
+    fg.innerHTML = STAR.repeat(5);
+    fg.style.width = (r / 5) * 100 + "%";
+    st.appendChild(bg);
+    st.appendChild(fg);
+    row.appendChild(st);
+    row.appendChild(el("span", "rate-num", r.toFixed(1)));
+    return row;
+  }
+  function priceLine(p, cls) {
+    const box = el("div", cls);
+    if (p.diskon) box.appendChild(el("s", "price-old", rupiah(p.hargaAsli)));
+    box.appendChild(el("strong", "price-now", rupiah(p.harga)));
+    return box;
   }
   const ICON_BAG =
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>';
@@ -107,14 +137,20 @@
       media.innerHTML = ICON_BAG;
     }
     if (p.label) media.insertAdjacentElement("afterbegin", el("span", "pcard-tag", p.label));
+    if (p.diskon) {
+      const off = el("span", "pcard-off", "-" + p.diskon + "%");
+      off.setAttribute("aria-label", "Diskon " + p.diskon + " persen");
+      media.appendChild(off);
+    }
 
     const body = el("div", "pcard-body");
     if (p.kategori) body.appendChild(el("span", "pcard-cat", p.kategori));
     body.appendChild(el("h3", "", p.nama));
+    if (p.rating) body.appendChild(ratingRow(p.rating));
     if (p.deskripsi) body.appendChild(el("p", "pcard-desc", p.deskripsi));
 
     const foot = el("div", "pcard-foot");
-    const price = el("span", "pcard-price", rupiah(p.harga));
+    const price = priceLine(p, "pcard-price");
     if (p.stok !== null && p.stok > 0 && p.stok <= 10) price.appendChild(el("span", "pcard-stock", "Sisa " + p.stok));
     const btn = el("button", "btn btn-primary small btn-add", maxQty(p) === 0 ? "Habis" : "Tambah");
     btn.type = "button";
@@ -224,7 +260,7 @@
 
       const mid = el("div", "citem-mid");
       mid.appendChild(el("div", "citem-name", p.nama));
-      mid.appendChild(el("div", "citem-price", rupiah(p.harga)));
+      mid.appendChild(priceLine(p, "citem-price"));
       const q = el("div", "citem-qty");
       const minus = el("button", "qbtn", "−");
       minus.type = "button";
@@ -325,8 +361,10 @@
       return;
     }
     const url = "https://wa.me/" + num + "?text=" + encodeURIComponent(orderText());
-    const w = window.open(url, "_blank", "noopener");
-    say(w ? "WhatsApp dibuka. Kirim pesannya untuk menyelesaikan pesanan." : "Pop-up diblokir. Izinkan pop-up atau pakai Salin pesanan.");
+    const w = window.open(url, "_blank");
+    if (w) { try { w.opener = null; } catch (e) {} }
+    else window.location.href = url; // kalau tab baru diblokir, buka di tab ini
+    say("");
   });
 
   copyBtn.addEventListener("click", function () {

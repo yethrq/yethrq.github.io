@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#101319" />
     <link rel="icon" href="../assets/core/images/foto-profil.jpeg" type="image/jpeg" />
     <link rel="stylesheet" href="../css/global.css?v=20261014" />
-    <link rel="stylesheet" href="../css/shop.css?v=20261022" />
+    <link rel="stylesheet" href="../css/shop.css?v=20261026" />
     <script>
       try {
         document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
@@ -134,11 +134,11 @@
         <div class="cart-total"><span>Total</span><strong id="cart-total">Rp 0</strong></div>
         <label class="cart-field">
           <span>Nama kamu</span>
-          <input type="text" id="cart-name" maxlength="60" autocomplete="name" placeholder="Nama pemesan" />
+          <input type="text" id="cart-name" maxlength="60" autocomplete="off" placeholder="Nama pemesan" />
         </label>
         <label class="cart-field">
           <span>Catatan (opsional)</span>
-          <textarea id="cart-note" rows="2" maxlength="200" placeholder="Ukuran, warna, alamat, dll"></textarea>
+          <textarea id="cart-note" autocomplete="off" rows="2" maxlength="200" placeholder="Ukuran, warna, alamat, dll"></textarea>
         </label>
         <button type="button" class="btn btn-primary cart-send" id="cart-send">Pesan lewat WhatsApp</button>
         <div class="cart-sub">
@@ -152,9 +152,9 @@
     <!-- Musik latar: Legacy, hanya dikontrol tombol navbar -->
     <audio id="bg-music" src="../assets/core/audio/legacy.mp3" loop preload="none"></audio>
 
-    <script src="../js/konten.js?v=20261022"></script>
+    <script src="../js/konten.js?v=20261026"></script>
     <script src="../js/render.js?v=20261022"></script>
     <script src="../js/main.js?v=20261018"></script>
-    <script src="../js/shop.js?v=20261022"></script>
+    <script src="../js/shop.js?v=20261026"></script>
   </body>
 </html>
